@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+# Конвертер валют
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для конвертации валют, разработанное с использованием React, TypeScript и Vite.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Конвертация между более чем 160 мировыми валютами
+- Двусторонняя конвертация (из базовой валюты в целевую и наоборот)
+- Автоматическое обновление курсов валют через API
+- Обработка ошибок и индикация загрузки
+- Удобный пользовательский интерфейс
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- Axios для HTTP-запросов
+- CSS модули для стилизации
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Установка и запуск
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Предварительные требования
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (версия 14.x или выше)
+- npm или yarn
+
+### Настройка проекта
+
+1. Клонируйте репозиторий:
+
+```bash
+git clone <url-репозитория>
+cd convert
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Установите зависимости:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+3. Создайте файл `.env` в корневой директории проекта со следующими переменными:
+
+```
+VITE_BASE_URL=<url-api-для-конвертации-валют>
+VITE_API_KEY=<ваш-api-ключ>
+```
+
+4. Запустите приложение в режиме разработки:
+
+```bash
+npm run dev
+```
+
+5. Для сборки проекта:
+
+```bash
+npm run build
+```
+
+## Использование
+
+1. Выберите базовую валюту из выпадающего списка
+2. Выберите целевую валюту из выпадающего списка
+3. Введите сумму в поле базовой или целевой валюты
+4. Приложение автоматически выполнит конвертацию
+
+По умолчанию используется конвертация из USD (доллар США) в RUB (российский рубль).
+
+## Структура проекта
+
+```
+src/
+  ├── components/         # UI компоненты
+  │   ├── currency/       # Компонент выбора валюты
+  │   ├── error/          # Компонент отображения ошибок
+  │   └── spinner/        # Компонент индикации загрузки
+  ├── hooks/              # Пользовательские React хуки
+  │   └── useConvert.ts   # Хук для конвертации валют
+  ├── App.tsx             # Основной компонент приложения
+  ├── constants.ts        # Константы и список валют
+  ├── main.tsx           # Точка входа в приложение
+  └── ...
+```
+
+## API
+
+Приложение использует внешний API для получения актуальных курсов валют. Для работы приложения необходимо получить API-ключ и настроить соответствующие переменные окружения.
+
+## Лицензия
+
+[MIT](https://choosealicense.com/licenses/mit/)
